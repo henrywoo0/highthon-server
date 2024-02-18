@@ -25,8 +25,8 @@ public class RankingAPI {
     public void createRanking(@RequestBody @Valid CreateRankingRequest request) {
         Ranking ranking = rankingRepository.findByToken(request.getToken())
                 .orElseGet(request::toEntity);
-        if (request.getSeconds() > ranking.getSeconds()) {
-            ranking.setSeconds(request.getSeconds());
+        if (Integer.parseInt(request.getSeconds()) > ranking.getSeconds()) {
+            ranking.setSeconds(Integer.parseInt(request.getSeconds()));
         }
         rankingRepository.save(ranking);
     }
